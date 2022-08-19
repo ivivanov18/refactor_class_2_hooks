@@ -6,7 +6,9 @@ const Select = ({ options }) => (
     <label htmlFor="chartsSelection">Please, select a chart</label>
     <select name="chartsSelection">
       {options.map((o) => (
-        <option value={o.value}>{o.label}</option>
+        <option key={o.value} value={o.value}>
+          {o.label}
+        </option>
       ))}
     </select>
   </>
