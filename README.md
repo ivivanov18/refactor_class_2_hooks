@@ -1,4 +1,5 @@
 # Refactoring to React Hooks - liveProject
+
 > Base repo
 
 ## Getting started
@@ -33,3 +34,9 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified, and the filenames include the hashes.<br />
 Your app is ready to be deployed!
+
+### Deliverables
+
+#### milestone1
+
+Represents the deliverables of the chapter **Managing Local State and Data Fetching with React Hooks**
