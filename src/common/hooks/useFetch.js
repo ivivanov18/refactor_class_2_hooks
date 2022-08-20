@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useReducer } from "react";
 import { Server } from "miragejs";
 import { sales, subscriptions } from "../../mocks";
 
 if (process.env.NODE_ENV === "development") {
   new Server({
     routes() {
+      this.routes = 2000;
       this.namespace = process.env.REACT_APP_BASE_URL;
 
       this.get("sales", () => {
@@ -18,6 +19,12 @@ if (process.env.NODE_ENV === "development") {
   });
 }
 
+const initialState = {
+  data: [],
+  loading: false,
+  error: "",
+};
+
 /**
  * Hook that uses fetch API to get the results from the endpoint
  * If the endpoint is empty string, returns empty array from consistency
@@ -26,25 +33,51 @@ if (process.env.NODE_ENV === "development") {
  * @returns {array} data - data from the endpoint or []
  */
 export function useFetch(endpoint) {
-  const [data, setData] = useState([]);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     if (endpoint !== "") {
+      dispatch({ type: "loading", payload: true });
       fetch(`${process.env.REACT_APP_BASE_URL}/${endpoint}`)
         .then((response) => {
+          dispatch({ type: "loading", payload: false });
           if (!response.ok) {
             throw new Error(response.statusText);
           }
           return response.json();
         })
         .then((json) => {
-          console.log({ json });
-          setData(json);
+          dispatch({ type: "data", payload: json });
+        })
+        .catch((err) => {
+          dispatch({ type: "error", payload: err });
         });
     } else {
-      setData([]);
+      dispatch({ type: "data", payload: [] });
     }
   }, [endpoint]);
 
-  return data;
+  return state;
+}
+
+/**
+ * Reducer that handles the actions "data" - setting data, "error": setting error
+ * and "loading": setting loading.
+ * In case of default action - the same state is returned to handle the case of choosing "--"
+ * from Select
+ * @param {Object} state - object containing data - {Array}, error - {string} and loading - {boolean}
+ * @param {Object} action - object containing type - {string} and payload: depending on the action
+ * @returns {Object} - the state
+ */
+function reducer(state, action) {
+  switch (action.type) {
+    case "loading":
+      return { ...state, loading: action.payload };
+    case "error":
+      return { ...state, error: action.payload, data: [] };
+    case "data":
+      return { ...state, data: action.payload, error: "" };
+    default:
+      return state;
+  }
 }
