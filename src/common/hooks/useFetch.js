@@ -18,6 +18,13 @@ if (process.env.NODE_ENV === "development") {
   });
 }
 
+/**
+ * Hook that uses fetch API to get the results from the endpoint
+ * If the endpoint is empty string, returns empty array from consistency
+ * If dev mode, the results from api mocking above are returned
+ * @param {string} endpoint
+ * @returns {array} data - data from the endpoint or []
+ */
 export function useFetch(endpoint) {
   const [data, setData] = useState([]);
 

@@ -9,7 +9,7 @@ const OPTIONS = [
   { value: "subscriptions", label: "Subscriptions" },
 ];
 
-const SelectContainer = () => {
+const DisplayDataContainer = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const data = useFetch(selectedOption);
 
@@ -26,4 +26,4 @@ const SelectContainer = () => {
   );
 };
 
-export default SelectContainer;
+export default DisplayDataContainer;
