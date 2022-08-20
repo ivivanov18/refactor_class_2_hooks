@@ -40,3 +40,7 @@ Your app is ready to be deployed!
 #### milestone1
 
 Represents the deliverables of the chapter **Managing Local State and Data Fetching with React Hooks**
+
+### milestone2
+
+Represents the deliverables of the chapter **Building a custom React Hook for Data Fetching**
