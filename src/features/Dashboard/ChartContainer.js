@@ -5,14 +5,8 @@ import { StateContext } from "../../context";
 
 const ChartContainer = ({ selectedLabel }) => {
   const { data } = React.useContext(StateContext);
-  const chartLabels = useMemo(
-    data.map((dataPoint) => dataPoint.timestamp),
-    [data]
-  );
-  const chartValues = useMemo(
-    data.map((dataPoint) => dataPoint.amount),
-    [data]
-  );
+  const chartLabels = data.map((dataPoint) => dataPoint.timestamp);
+  const chartValues = data.map((dataPoint) => dataPoint.amount);
 
   return (
     <div>
