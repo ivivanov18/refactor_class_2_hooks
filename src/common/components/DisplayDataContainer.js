@@ -28,7 +28,7 @@ const DisplayDataContainer = () => {
 
   return (
     <>
-      <Select onChange={onChangeSelect} options={OPTIONS} />
+      <Select onChange={onChangeSelect} options={OPTIONS} id="select-product" />
       {displayed}
     </>
   );
