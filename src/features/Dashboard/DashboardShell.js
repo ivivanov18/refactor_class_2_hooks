@@ -7,6 +7,14 @@ import SummaryContainer from "./SummaryContainer";
 import Select from "../../common/components/Select";
 // import { fetchDataset } from "./DashboardSlice";
 
+const optionsForSelect = [
+  { label: "Sales", value: "sales" },
+  {
+    label: "Subscriptions",
+    value: "subscriptions",
+  },
+];
+
 function DashboardShell() {
   const [selectedLabel, setSelectedLabel] = useState("");
 
@@ -21,14 +29,6 @@ function DashboardShell() {
   };
 
   const buildSelect = () => {
-    const optionsForSelect = [
-      { label: "Sales", value: "sales" },
-      {
-        label: "Subscriptions",
-        value: "subscriptions",
-      },
-    ];
-
     return (
       <>
         <div className="field">
@@ -56,7 +56,12 @@ function DashboardShell() {
     <Layout>
       <Aside>
         <h2># Polly dashboard</h2>
-        {buildSelect()}
+        <Select
+          id="select-product"
+          label="Please select a chart:"
+          onChange={handleSelectChange}
+          options={optionsForSelect}
+        />
       </Aside>
       <Main>
         <h1>

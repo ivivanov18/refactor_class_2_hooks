@@ -1,11 +1,12 @@
 import * as React from "react";
+import { sales } from "../mocks";
 
 const initialState = {
   loading: false,
-  data: [],
+  data: sales,
   error: "",
-  salesTotal: 0,
-  subscriptionsTotal: 0,
+  salesTotal: 3466,
+  subscriptionsTotal: 1492,
 };
 
 export const StateContext = React.createContext();
