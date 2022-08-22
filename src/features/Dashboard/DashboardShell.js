@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Aside from "../../common/components/Aside";
 import ChartContainer from "./ChartContainer";
 import Layout from "../../common/components/Layout";
 import Main from "../../common/components/Main";
 import SummaryContainer from "./SummaryContainer";
 import Select from "../../common/components/Select";
-// import { fetchDataset } from "./DashboardSlice";
+import { StateContext } from "../../context";
 
 const optionsForSelect = [
   { label: "Sales", value: "sales" },
@@ -16,16 +16,14 @@ const optionsForSelect = [
 ];
 
 function DashboardShell() {
-  const [selectedLabel, setSelectedLabel] = useState("");
+  const { setSelectedOption } = useContext(StateContext);
 
   // componentDidMount() {
   //   this.props.fetchDataset(`${process.env.REACT_APP_BASE_URL}/totals/`);
   // }
 
-  const handleSelectChange = (event) => {
-    // const selectedLabel = event.target.selectedOptions[0].label;
-    // this.props.fetchDataset(event.target.value);
-    // this.setState({ selectedLabel });
+  const handleSelectChange = (value) => {
+    setSelectedOption(value.target.value);
   };
 
   return (
@@ -44,7 +42,7 @@ function DashboardShell() {
           Welcome, <span className="bold">learner!</span>
         </h1>
         <SummaryContainer />
-        <ChartContainer selectedLabel={selectedLabel} />
+        <ChartContainer />
       </Main>
     </Layout>
   );

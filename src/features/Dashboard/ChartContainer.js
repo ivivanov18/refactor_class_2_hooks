@@ -1,26 +1,27 @@
-import React, { useMemo } from "react";
+import React from "react";
 import LineChart from "./LineChart";
-import PropTypes from "prop-types";
+import Loading from "../../common/components/Loading";
 import { StateContext } from "../../context";
 
-const ChartContainer = ({ selectedLabel }) => {
-  const { data } = React.useContext(StateContext);
+const ChartContainer = () => {
+  const { data, selectedOption, error, loading } =
+    React.useContext(StateContext);
   const chartLabels = data.map((dataPoint) => dataPoint.timestamp);
   const chartValues = data.map((dataPoint) => dataPoint.amount);
 
-  return (
-    <div>
-      <LineChart
-        chartLabels={chartLabels}
-        chartValues={chartValues}
-        label={selectedLabel}
-      />
-    </div>
+  const displayed = loading ? (
+    <Loading />
+  ) : error ? (
+    <p>{error.message}</p>
+  ) : (
+    <LineChart
+      chartLabels={chartLabels}
+      chartValues={chartValues}
+      label={selectedOption}
+    />
   );
-};
 
-ChartContainer.propTypes = {
-  selectedLabel: PropTypes.string.isRequired,
+  return <div>{displayed}</div>;
 };
 
 export default ChartContainer;
