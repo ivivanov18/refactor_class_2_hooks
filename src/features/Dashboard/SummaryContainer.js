@@ -1,8 +1,16 @@
 import React from "react";
-import { StateContext } from "../../context";
+import Loading from "../../common/components/Loading";
+import { useFetch } from "../../common/hooks/useFetch";
 
 const SummaryContainer = () => {
-  const { salesTotal, subscriptionsTotal } = React.useContext(StateContext);
+  const {
+    loading,
+    data: { salesTotal, subscriptionsTotal },
+  } = useFetch("totals");
+
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className="summary flex flex-row">
       <div className="card bg-indigo">

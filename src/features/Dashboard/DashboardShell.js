@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
+import PropTypes from "prop-types";
 import Aside from "../../common/components/Aside";
 import ChartContainer from "./ChartContainer";
 import Layout from "../../common/components/Layout";
@@ -15,15 +16,13 @@ const optionsForSelect = [
   },
 ];
 
-function DashboardShell() {
-  const { setSelectedOption } = useContext(StateContext);
-
+function DashboardShell({ fetchDataSet }) {
   // componentDidMount() {
   //   this.props.fetchDataset(`${process.env.REACT_APP_BASE_URL}/totals/`);
   // }
 
   const handleSelectChange = (value) => {
-    setSelectedOption(value.target.value);
+    fetchDataSet(value.target.value);
   };
 
   return (
@@ -47,5 +46,9 @@ function DashboardShell() {
     </Layout>
   );
 }
+
+DashboardShell.propTypes = {
+  fetchDataSet: PropTypes.func.isRequired,
+};
 
 export default DashboardShell;
