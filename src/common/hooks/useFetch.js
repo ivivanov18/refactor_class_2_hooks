@@ -15,6 +15,15 @@ if (process.env.NODE_ENV === "development") {
       this.get("subscriptions", () => {
         return subscriptions;
       });
+
+      this.get("totals", () => {
+        const salesTotal = sales.reduce((acc, elt) => acc + elt.amount, 0);
+        const subscriptionsTotal = subscriptions.reduce(
+          (acc, elt) => acc + elt.amount,
+          0
+        );
+        return { salesTotal, subscriptionsTotal };
+      });
     },
   });
 }
@@ -38,6 +47,7 @@ export function useFetch(endpoint) {
   useEffect(() => {
     if (endpoint !== "") {
       dispatch({ type: "loading", payload: true });
+      console.log("endpoint fetching: ", endpoint);
       fetch(`${process.env.REACT_APP_BASE_URL}/${endpoint}`)
         .then((response) => {
           dispatch({ type: "loading", payload: false });
