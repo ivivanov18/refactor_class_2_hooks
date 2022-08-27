@@ -3,9 +3,8 @@ import LineChart from "./LineChart";
 import Loading from "../../common/components/Loading";
 import { StateContext } from "../../context";
 
-const ChartContainer = () => {
-  const { data, selectedOption, error, loading } =
-    React.useContext(StateContext);
+const ChartContainer = ({ label }) => {
+  const { data, error, loading } = React.useContext(StateContext);
   const chartLabels = data.map((dataPoint) => dataPoint.timestamp);
   const chartValues = data.map((dataPoint) => dataPoint.amount);
 
@@ -17,7 +16,7 @@ const ChartContainer = () => {
     <LineChart
       chartLabels={chartLabels}
       chartValues={chartValues}
-      label={selectedOption}
+      label={label}
     />
   );
 

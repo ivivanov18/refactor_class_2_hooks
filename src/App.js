@@ -8,7 +8,10 @@ const App = () => {
   const state = useFetch(selectedOption);
   return (
     <StateProvider state={state}>
-      <DashboardShell fetchDataSet={setSelectedOption} />
+      <DashboardShell
+        fetchDataSet={setSelectedOption}
+        selectedOption={selectedOption}
+      />
     </StateProvider>
   );
 };

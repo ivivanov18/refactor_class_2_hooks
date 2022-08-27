@@ -2,7 +2,7 @@ import { useEffect, useReducer } from "react";
 import { Server } from "miragejs";
 import { sales, subscriptions } from "../../mocks";
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "development" && !window.Cypress) {
   new Server({
     routes() {
       this.routes = 2000;

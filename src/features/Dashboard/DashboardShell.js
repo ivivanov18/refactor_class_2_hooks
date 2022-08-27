@@ -16,11 +16,7 @@ const optionsForSelect = [
   },
 ];
 
-function DashboardShell({ fetchDataSet }) {
-  // componentDidMount() {
-  //   this.props.fetchDataset(`${process.env.REACT_APP_BASE_URL}/totals/`);
-  // }
-
+function DashboardShell({ fetchDataSet, selectedOption }) {
   const handleSelectChange = (value) => {
     fetchDataSet(value.target.value);
   };
@@ -41,7 +37,7 @@ function DashboardShell({ fetchDataSet }) {
           Welcome, <span className="bold">learner!</span>
         </h1>
         <SummaryContainer />
-        <ChartContainer />
+        <ChartContainer label={selectedOption} />
       </Main>
     </Layout>
   );
@@ -49,6 +45,7 @@ function DashboardShell({ fetchDataSet }) {
 
 DashboardShell.propTypes = {
   fetchDataSet: PropTypes.func.isRequired,
+  selectedOption: PropTypes.string.isRequired,
 };
 
 export default DashboardShell;
